@@ -13,7 +13,7 @@ export default function Pagina(props) {
                         <NavDropdown title="Filmes" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/">Populares</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="/">Em Cartaz</NavDropdown.Item>
+                            <NavDropdown.Item href="/filmes/cards">Em Cartaz</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="/">Tabela</NavDropdown.Item>
                             <NavDropdown.Divider />

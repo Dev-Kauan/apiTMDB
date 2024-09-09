@@ -11,22 +11,22 @@ export default function Page() {
     const [filmes, setFilmes] = useState([])
 
     useEffect(() => {
-       apiMovie.get('movie/popular').then(resultado => {
+       apiMovie.get('discover/tv').then(resultado => {
         setFilmes(resultado.data.results)
        })
     }, [])
 
     return (
-        <Pagina titulo="Filmes">
+        <Pagina titulo="Series">
             <Row md={3}>
                 {filmes.map(item => (
                     <Col key={item.id} className="my-2" >{}
                     <Card style={{width: '100%'}}>
                     <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500' + item.backdrop_path} height={200} />
                     <Card.Body>
-                      <Card.Title>{item.title}</Card.Title>
+                      <Card.Title>{item.name}</Card.Title>
                       <Card.Text>
-                        {item.original_title}
+                        {item.original_name}
                       </Card.Text>
                       <Card.Text>
                         Popularidade: {item.popularity}
