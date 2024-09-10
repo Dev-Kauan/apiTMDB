@@ -11,7 +11,7 @@ const apiMovie = axios.create({
         language: 'pt-BR'  // Define o idioma como português do Brasil
     },
     headers: {
-        Authorization: `Bearer ${process.env.API_KEY}`,  // Usa template literals para a chave de API
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`,  // Usa template literals para a chave de API
     }
 });
 

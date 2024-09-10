@@ -3,7 +3,8 @@
 import Pagina from "@/app/components/Pagina";
 import { useEffect, useState } from "react";
 import apiMovie from "@/app/services/apiMovie";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
+import Link from "next/link";
 
 export default function Page() {
     const [atores, setAtores] = useState([]);
@@ -31,7 +32,7 @@ export default function Page() {
                                 <Card.Text>
                                     Popularidade: {ator.popularity}
                                 </Card.Text>
-                                <Button variant="danger">Ver Detalhes</Button>
+                                <Link href={`/atores/${ator.id}`} className="btn btn-danger">Ver detalhes</Link>
                             </Card.Body>
                         </Card>
                     </Col>

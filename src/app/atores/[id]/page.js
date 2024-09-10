@@ -2,31 +2,30 @@
 
 import Pagina from "@/app/components/Pagina";
 import apiMovie from "@/app/services/apiMovie";
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 
 export default function Page({ params }) {
 
-    const [actor, setActor] = useState({})
-    const [movies, setMovies] = useState([])
+    const [ator, setator] = useState({})
+    const [filmes, setfilmes] = useState([])
 
     useEffect(() => {
-        // Buscando detalhes do ator
         apiMovie.get(`person/${params.id}`).then(resultado => {
-            setActor(resultado.data)
+            setator(resultado.data)
         })
 
-        // Buscando filmes em que o ator participou
         apiMovie.get(`person/${params.id}/movie_credits`).then(resultado => {
-            setMovies(resultado.data.cast) // Armazenando os filmes
+            setfilmes(resultado.data.cast)
         })
 
-    }, [params.id])
+    }, [])
 
     return (
-        <Pagina titulo="Detalhes do Ator">
+        <Pagina titulo="Detalhes Filme">
             {
-                !actor.id &&
+                !ator.id &&
                 <div className="d-flex justify-content-center align-items-center vh-100">
                     <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
@@ -35,41 +34,31 @@ export default function Page({ params }) {
             }
 
             {
-                actor.id &&
+                ator.id &&
                 <div>
                     <Row className="mt-3">
-                        <Col className="col-12">
-                            <h1>{actor.name}</h1>
-                            {actor.profile_path ? (
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                                    alt={actor.name}
-                                    style={{ width: '150px', height: 'auto', borderRadius: '8px' }}
-                                />
-                            ) : (
-                                <div style={{ width: '150px', height: '150px', backgroundColor: '#ddd', borderRadius: '8px' }}>
-                                    <p style={{ textAlign: 'center', padding: '10px' }}>Imagem não disponível</p>
-                                </div>
-                            )}
-                            <p><b>Data de Nascimento:</b> {actor.birthday}</p>
-                            <p><b>Biografia:</b> {actor.biography}</p>
+                        <h1>{ator.name}</h1>
+                        <Col sm={4}>
+                            <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500' + ator.profile_path} alt={ator.name} />
                         </Col>
-                        <Col style={{ marginTop: 20 }} className="col-12">
+                        <Col sm={8}>
+                            <p><b>Data Nascimento:</b> {ator.birthday}</p>
+                            <p><b>Local Nascimento:</b> {ator.place_of_birth}</p>
+                            <p><b>Popularidade:</b> {ator.popularity}</p>
+                            <p><b>Orçamento:</b> {ator.biography}</p>
+                            <Link className="btn btn-primary" href={`/atores/`}>Voltar</Link>
+                        </Col>
+                        <Col sm={12}>
                             <h1>Filmes</h1>
-                            <div className="d-flex flex-wrap" style={{ gap: '20px' }}>
-                                {movies.slice(0, 10).map(movie => (
-                                    movie.poster_path && (
-                                        <div key={movie.id} className="d-flex flex-column align-items-center">
-                                            <img
-                                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                                alt={movie.title}
-                                                style={{ width: '120px', height: 'auto', borderRadius: '8px' }}
-                                            />
-                                            <p>{movie.title}</p>
-                                        </div>
-                                    )
+                            <Row>
+                                {filmes.map(item => (
+                                    <Col key={item.id} title={item.title} sm={2} className="mb-3">
+                                        <Link href={`/filmes/${item.id}`}>
+                                            <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500' + item.poster_path} />
+                                        </Link>
+                                    </Col>
                                 ))}
-                            </div>
+                            </Row>
                         </Col>
                     </Row>
                 </div>
