@@ -1,0 +1,37 @@
+1 entrar no CMD
+2 cd Desktop
+3 cd fron e Tab
+4 colar o => npx create-next-app@latest
+5 confirma
+6 nome do projeto
+7 aplicar a sequencia:
+
+Sequência:
+N, 
+N, 
+N,
+Y, 
+Y, 
+N
+
+8 code "nome do projeto"
+9 instalar as dependencias
+
+npm install react-bootstrap bootstrap
+
+npm i axios
+
+10 substituir a segunda linha do layout.js dentro do source/app
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+11 rodar o projeto
+
+npm run dev
+
+12 - copiar a pasta components e pasta service e colar dentro do novo projeto.
+
+
+//linha do browse
+
+?api_key=
