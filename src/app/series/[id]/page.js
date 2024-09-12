@@ -12,17 +12,19 @@ export default function Page({ params }) {
     const [atores, setAtores] = useState([])
 
     useEffect(() => {
-        apiMovie.get(`tv/${params.id}/`).then(resultado => {
-            setserie(resultado.data)
+        apiMovie.get(`tv/${params.id}`).then(resultado => {
+            setserie(resultado.data);
         })
-        apiMovie.get(`person/${params.id}`).then(resultado => {
-            setserie(resultado.data)
+        apiMovie.get(`tv/${params.id}/credits`).then(resultado => {
+            setAtores(resultado.data.cast)
         })
     }, [])
 
     return (
         <Pagina titulo="Detalhes Série">
+            {console.log('Detalhes da série:', serie)}
             {
+                
                 !serie.id &&
                 <div className="d-flex justify-content-center align-items-center vh-100">
                     <Spinner animation="border" role="status">
@@ -46,7 +48,7 @@ export default function Page({ params }) {
                             <Link className="btn btn-primary" href={`/series/`}>Voltar</Link>
                         </Col>
                         <Col sm={12}>
-                            <h1>Temporadas</h1>
+                            <h1>Atores</h1>
                             <Row>
                                 {atores.map(item => (
                                     <Col key={item.id} title={item.name} sm={2} className="mb-3">

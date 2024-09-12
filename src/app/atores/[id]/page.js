@@ -23,7 +23,7 @@ export default function Page({ params }) {
     }, [])
 
     return (
-        <Pagina titulo="Detalhes Filme">
+        <Pagina titulo="Detalhes Atores">
             {
                 !ator.id &&
                 <div className="d-flex justify-content-center align-items-center vh-100">
