@@ -24,7 +24,7 @@ export default function Page({ params }) {
         <Pagina titulo="Detalhes Série">
             {console.log('Detalhes da série:', serie)}
             {
-                
+
                 !serie.id &&
                 <div className="d-flex justify-content-center align-items-center vh-100">
                     <Spinner animation="border" role="status">
@@ -45,15 +45,22 @@ export default function Page({ params }) {
                             <p><b>Titulo Original:</b> {serie.original_name}</p>
                             <p><b>Popularidade:</b> {serie.popularity}</p>
                             <p><b>Sinopse: </b> {serie.overview}</p>
+                            <p><b>Data de Lançamento: </b>{serie.first_air_date}</p>
+                            <p><b>Temporadas: </b>{serie.seasons.length}</p>
                             <Link className="btn btn-primary" href={`/series/`}>Voltar</Link>
                         </Col>
                         <Col sm={12}>
-                            <h1>Atores</h1>
+                            <h1>Temporadas</h1>
                             <Row>
-                                {atores.map(item => (
-                                    <Col key={item.id} title={item.name} sm={2} className="mb-3">
-                                        <Link href={`/atores/${item.id}`}>
-                                            <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500' + item.profile_path} />
+                                {serie.seasons.map(item => (
+                                    <Col
+                                        key={item.id}
+                                        title={item.name}
+                                        className="mb-3"
+                                        sm={2}
+                                    >
+                                        <Link href={`/series/${serie.id}/temporada/${item.season_number}`}>
+                                            <img className="img-fluid" src={'https://image.tmdb.org/t/p/w500/' + item.poster_path} />
                                         </Link>
                                     </Col>
                                 ))}
